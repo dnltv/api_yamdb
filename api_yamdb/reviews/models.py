@@ -6,12 +6,16 @@ from django.db import models
 User = get_user_model()
 
 
+class Title(models.Model):
+    pass
+
+
 class Review(models.Model):
     """
     Model representing a Review on Title from auth users.
     """
     title = models.ForeignKey(
-        'Title',
+        Title,
         on_delete=models.CASCADE,
         related_name='reviews',
         verbose_name='Произведение'
