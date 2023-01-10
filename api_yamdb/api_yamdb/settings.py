@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_TOKEN')
@@ -19,7 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reviews'
+    'rest_framework',
+    'reviews',
+    'api'
 ]
 
 MIDDLEWARE = [
