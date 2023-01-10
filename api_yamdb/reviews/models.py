@@ -31,7 +31,7 @@ class Review(models.Model):
 
     class Meta:
         ordering = ('id',)
-        constraint = [
+        constraints = [
             models.UniqueConstraint(
                 fields=('author', 'title'),
                 name='unique review'
