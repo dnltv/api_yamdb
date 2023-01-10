@@ -1,6 +1,5 @@
-from rest_framework.serializers import (ModelSerializer,
-                                        ValidationError, CurrentUserDefault,
-                                        SlugRelatedField)
+from rest_framework.serializers import (CurrentUserDefault, ModelSerializer,
+                                        SlugRelatedField, ValidationError)
 
 from api_yamdb.reviews.models import Review
 
