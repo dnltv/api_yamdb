@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from reviews.models import Comment, Review
+
+from api_yamdb.reviews.models import Comment, Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
