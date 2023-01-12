@@ -2,13 +2,13 @@ from django.db.models import Avg
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 
-from reviews.models import Category, Genre, Title, Review, Title
+from reviews.models import Category, Genre, Review, Title
 
-from .serializers import (CategorySerializer, GenreSerializer, TitleSerializer,
-                          CommentSerializer, ReviewSerializer,
-                          TitleCreateSerializer)
-from .permissions import (AdminOnly, AdminOrReadOnly,
-                          AdminModeratorAuthorOrReadOnly)
+from .permissions import (AdminModeratorAuthorOrReadOnly, AdminOnly,
+                          AdminOrReadOnly)
+from .serializers import (CategorySerializer, CommentSerializer,
+                          GenreSerializer, ReviewSerializer,
+                          TitleCreateSerializer, TitleSerializer)
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
