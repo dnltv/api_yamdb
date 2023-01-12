@@ -1,9 +1,35 @@
+from django.db.models import Avg
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 
-from reviews.models import Review, Title
+from reviews.models import Category, Genre, Title, Review, Title
 
-from .serializers import CommentSerializer, ReviewSerializer
+from .serializers import (CategorySerializer, GenreSerializer, TitleSerializer,
+                          CommentSerializer, ReviewSerializer,
+                          TitleCreateSerializer)
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    lookup_field = 'slug'
+
+
+class GenreViewSet(viewsets.ModelViewSet):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+    lookup_field = 'slug'
+
+
+class TitleViewSet(viewsets.ModelViewSet):
+    queryset = Title.objects.annotate(
+        rating=Avg('reviews_score')).order_by('id').all()
+    serializer_class = TitleSerializer
+
+    def get_serializer_class(self):
+        if self.request.method in ('POST', 'PATCH'):
+            return TitleCreateSerializer
+        return TitleSerializer
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
