@@ -7,17 +7,21 @@ from reviews.models import Category, Genre, Title, Review, Title
 from .serializers import (CategorySerializer, GenreSerializer, TitleSerializer,
                           CommentSerializer, ReviewSerializer,
                           TitleCreateSerializer)
+from .permissions import (AdminOnly, AdminOrReadOnly,
+                          AdminModeratorAuthorOrReadOnly)
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = (AdminOrReadOnly,)
     lookup_field = 'slug'
 
 
 class GenreViewSet(viewsets.ModelViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+    permission_classes = (AdminOrReadOnly,)
     lookup_field = 'slug'
 
 
@@ -25,6 +29,7 @@ class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.annotate(
         rating=Avg('reviews_score')).order_by('id').all()
     serializer_class = TitleSerializer
+    permission_classes = (AdminOrReadOnly,)
 
     def get_serializer_class(self):
         if self.request.method in ('POST', 'PATCH'):
@@ -34,6 +39,7 @@ class TitleViewSet(viewsets.ModelViewSet):
 
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
+    permission_classes = (AdminModeratorAuthorOrReadOnly,)
 
     def get_query_set(self):
         title = get_object_or_404(
@@ -50,6 +56,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
+    permission_classes = (AdminModeratorAuthorOrReadOnly,)
 
     def get_queryset(self):
         review = get_object_or_404(
