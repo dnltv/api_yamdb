@@ -1,17 +1,17 @@
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, permissions, status
+from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from reviews.models import Category, Genre, Review, Title
+from reviews.models import Category, Genre, Review, Title, User
 
 from .permissions import (AdminModeratorAuthorOrReadOnly, AdminOnly,
                           AdminOrReadOnly)
 from .serializers import (CategorySerializer, CommentSerializer,
                           GenreSerializer, ReviewSerializer,
                           TitleCreateSerializer, TitleSerializer,
-                          UserSerializer, UserEditSerializer)
+                          UserEditSerializer, UserSerializer)
 
 
 class UserViewSet(viewsets.ModelViewSet):
