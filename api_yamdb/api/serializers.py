@@ -1,8 +1,30 @@
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from reviews.models import Category, Comment, Genre, Review, Title
+from reviews.models import Category, Comment, Genre, Review, Title, User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(
+        validators=(
+            UnicodeUsernameValidator(),
+            UniqueValidator(queryset=User.objects.all())
+        ),
+        max_length=150,
+        required=True
+    )
+    email = serializers.EmailField(
+        max_length=254,
+        required=True
+    )
+
+    class Meta:
+        model = User
+        fields = (
+            'username', 'email', 'first_name', 'last_name', 'bio', 'role'
+        )
 
 
 class CategorySerializer(serializers.ModelSerializer):
