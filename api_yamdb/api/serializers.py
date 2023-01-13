@@ -27,6 +27,10 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 
+class UserEditSerializer(serializers.ModelSerializer):
+    pass
+
+
 class CategorySerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=256)
     slug = serializers.SlugField(
