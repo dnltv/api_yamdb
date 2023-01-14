@@ -28,7 +28,20 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserEditSerializer(serializers.ModelSerializer):
-    pass
+    username = serializers.CharField(
+        max_length=150,
+        validators=(
+            UnicodeUsernameValidator(),
+            UniqueValidator(queryset=User.objects.all()),
+        ),
+        required=True,
+    )
+    role = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        fields = ('username', 'email', 'bio', 'role',
+                  'first_name', 'last_name')
+        model = User
 
 
 class CategorySerializer(serializers.ModelSerializer):
