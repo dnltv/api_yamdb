@@ -5,7 +5,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from reviews.models import Category, Genre, Review, Title, User
-
 from .permissions import (AdminModeratorAuthorOrReadOnly, AdminOnly,
                           AdminOrReadOnly)
 from .serializers import (CategorySerializer, CommentSerializer,
