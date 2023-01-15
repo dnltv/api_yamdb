@@ -1,10 +1,12 @@
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
-from rest_framework import permissions, status, viewsets
+from rest_framework import filters, permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from reviews.models import Category, Genre, Review, Title, User
+
+from .filters import TitleFilter
 from .permissions import (AdminModeratorAuthorOrReadOnly, AdminOnly,
                           AdminOrReadOnly)
 from .serializers import (CategorySerializer, CommentSerializer,
@@ -19,6 +21,8 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (AdminOnly,)
     lookup_field = 'username'
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('username',)
     help_method_names = ['get', 'post', 'delete', 'patch']
 
     @action(
@@ -49,6 +53,8 @@ class CategoryViewSet(CreateListDestroyViewSet):
     serializer_class = CategorySerializer
     permission_classes = (AdminOrReadOnly,)
     lookup_field = 'slug'
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name',)
 
 
 class GenreViewSet(CreateListDestroyViewSet):
@@ -56,6 +62,8 @@ class GenreViewSet(CreateListDestroyViewSet):
     serializer_class = GenreSerializer
     permission_classes = (AdminOrReadOnly,)
     lookup_field = 'slug'
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name',)
 
 
 class TitleViewSet(viewsets.ModelViewSet):
@@ -63,6 +71,7 @@ class TitleViewSet(viewsets.ModelViewSet):
         rating=Avg('reviews_score')).order_by('id').all()
     serializer_class = TitleSerializer
     permission_classes = (AdminOrReadOnly,)
+    filterset_class = TitleFilter
 
     def get_serializer_class(self):
         if self.request.method in ('POST', 'PATCH'):
