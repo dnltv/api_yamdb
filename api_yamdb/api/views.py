@@ -1,3 +1,5 @@
+from django.core.mail import EmailMessage
+from django.conf import settings
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
 from rest_framework import filters, permissions, status, viewsets
@@ -46,6 +48,16 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+def send_email(data):
+    email = EmailMessage(
+        subject=data['email_subject'],
+        body=data['email_info'],
+        from_email=settings.EMAIL_ADMIN,
+        to=[data['to_email']]
+    )
+    email.send()
 
 
 class CategoryViewSet(CreateListDestroyViewSet):
