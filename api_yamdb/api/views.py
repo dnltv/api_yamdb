@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
-from django.conf import settings
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
 from rest_framework import filters, permissions, status, viewsets
@@ -16,8 +16,8 @@ from .permissions import (AdminModeratorAuthorOrReadOnly, AdminOnly,
 from .serializers import (CategorySerializer, CommentSerializer,
                           GenreSerializer, ReviewSerializer,
                           TitleCreateSerializer, TitleSerializer,
-                          UserEditSerializer, UserSerializer,
-                          UserRegisterSerializer, TokenSerializer)
+                          TokenSerializer, UserEditSerializer,
+                          UserRegisterSerializer, UserSerializer)
 from .viewsets import CreateListDestroyViewSet
 
 
