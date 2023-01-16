@@ -71,8 +71,8 @@ def register(request):
         username=serializer.validated_data['username'],
         email=serializer.validated_data['email']
     )
-    confirmatiom_code = default_token_generator.make_token(user)
-    email_text = f'Confirmation code {confirmatiom_code}'
+    confirmation_code = default_token_generator.make_token(user)
+    email_text = f'Confirmation code {confirmation_code}'
     data = {
         'email_info': email_text,
         'to_email': user.email,

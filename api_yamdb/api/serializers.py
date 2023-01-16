@@ -77,6 +77,15 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         fields = ('username', 'email')
 
 
+class TokenSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(max_length=150)
+    confirmation_code = serializers.CharField()
+
+    class Meta:
+        model = User
+        fields = ('username', 'confirmation_code')
+
+
 class CategorySerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=256)
     slug = serializers.SlugField(
