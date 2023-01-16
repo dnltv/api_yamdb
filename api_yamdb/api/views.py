@@ -1,3 +1,4 @@
+from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.db.models import Avg
@@ -14,7 +15,8 @@ from .permissions import (AdminModeratorAuthorOrReadOnly, AdminOnly,
 from .serializers import (CategorySerializer, CommentSerializer,
                           GenreSerializer, ReviewSerializer,
                           TitleCreateSerializer, TitleSerializer,
-                          UserEditSerializer, UserSerializer)
+                          UserEditSerializer, UserSerializer,
+                          UserRegisterSerializer)
 from .viewsets import CreateListDestroyViewSet
 
 
@@ -63,7 +65,21 @@ def send_email(data):
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def register(request):
-    pass
+    serializer = UserRegisterSerializer
+    serializer.is_valid(raise_exception=True)
+    user, created = User.objects.get_or_create(
+        username=serializer.validated_data['username'],
+        email=serializer.validated_data['email']
+    )
+    confirmatiom_code = default_token_generator.make_token(user)
+    email_text = f'Confirmation code {confirmatiom_code}'
+    data = {
+        'email_info': email_text,
+        'to_email': user.email,
+        'mail_subject': 'Confirmation code'
+    }
+    send_email(data)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CategoryViewSet(CreateListDestroyViewSet):
