@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import filters, permissions, status, viewsets
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from reviews.models import Category, Genre, Review, Title, User
 
@@ -16,7 +17,7 @@ from .serializers import (CategorySerializer, CommentSerializer,
                           GenreSerializer, ReviewSerializer,
                           TitleCreateSerializer, TitleSerializer,
                           UserEditSerializer, UserSerializer,
-                          UserRegisterSerializer)
+                          UserRegisterSerializer, TokenSerializer)
 from .viewsets import CreateListDestroyViewSet
 
 
@@ -80,6 +81,25 @@ def register(request):
     }
     send_email(data)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def get_token(request):
+    serializer = TokenSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    user = get_object_or_404(
+        User,
+        username=serializer.validated_data['username']
+    )
+
+    if user.confirmation_code == serializer.validated_data.get(
+            'confirmation_code'
+    ):
+        token = RefreshToken.for_user(user).access_token
+        return Response({'token': str(token)}, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CategoryViewSet(CreateListDestroyViewSet):
