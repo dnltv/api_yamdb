@@ -5,6 +5,7 @@ charset-normalizer==2.0.12
 Django==3.2
 django-filter==22.1
 djangorestframework==3.12.4
+djangorestframework-simplejwt==5.2.2
 flake8==5.0.4
 idna==3.4
 importlib-metadata==4.2.0
