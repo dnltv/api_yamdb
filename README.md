@@ -1,33 +1,33 @@
-### Проект YaMDb (групповой проект 10 спринта курса Яндекс.Практикум)
-### Описание
-Проект YaMDb собирает отзывы (`Review`) пользователей на произведения (`Title`).
-Произведения делятся на категории: «_Книги_», «_Фильмы_», «_Музыка_».
-Список категорий (`Category`) может быть расширен (например, можно добавить категорию «И*зобразительное искусство*» или «_Ювелирка_»).
+### YaMDb project (group project of the 10th sprint of the Yandex.Practicum course)
+### Description
+The YaMDb project collects user reviews (`Review`) of works (`Title`).
+The works are divided into categories: "_Books_", "_Films_", "_Music_".
+The list of categories (`Category`) can be expanded (for example, you can add a category "*Fine Arts*" or "*Jewelry*").
 
-Команда разработки:
-- [Тресков Данил](https://github.com/dnltv)
-- [Чимров Иоанн](https://github.com/ioann7)
-- [Лесничук Кирилл](https://github.com/ButtonSlayer)
+Development Team:
+- [Danil Treskov](https://github.com/dnltv )
+- [Ioann Chimrov](https://github.com/ioann7 )
+- [Kirill Lesnichuk](https://github.com/ButtonSlayer )
 
-Сами произведения в YaMDb не хранятся, здесь нельзя посмотреть фильм или послушать музыку.
+The works themselves are not stored in YaMDb, you can't watch a movie or listen to music here.
 
-В каждой категории есть произведения: книги, фильмы или музыка. Например, в категории «**_Книги_**» могут быть произведения «Винни Пух и все-все-все» и «Марсианские хроники», а в категории «**_Музыка_**» — песня «Давеча» группы «Насекомые» и вторая сюита Баха. Произведению может быть присвоен жанр из списка предустановленных (например, «**_Сказка_**», «**_Рок_**» или «**_Артхаус_**»). Новые жанры может создавать только администратор.
+In each category there are works: books, movies or music. For example, in the category "**_books_**" there may be works "Winnie the Pooh and everything-everything-everything" and "Martian Chronicles", and in the category "**_music_**" — the song "Just Now" by the group "Insects" and the second suite by Bach. A work can be assigned a genre from the preset list (for example, "**_Fairy Tale_**", "**_Rock_**" or "**_Arthouse_**"). Only the administrator can create new genres.
 
-Благодарные или возмущённые читатели оставляют к произведениям текстовые отзывы (`Review`) и выставляют произведению **рейтинг** (оценку в диапазоне от одного до десяти). Из множества оценок автоматически высчитывается средняя оценка произведения.
+Grateful or outraged readers leave text reviews for the works (`Review`) and give the work a **rating** (rating in the range from one to ten). From the set of scores, the average score of the work is automatically calculated.
 
-Полная документация к API находится по эндпоинту `/redoc`
+The full API documentation is located at the endpoint `/redoc`
 
-### Стек технологий:
+### Technology Stack:
 - Python 3.7
 - Django 3.2
 - DRF 3.12.4
 - JWT 5.2.2
 
-Полный список в файле requirements.txt
+Full list in the file requirements.txt
 
-### Запуск проекта в dev-режиме
-- Клонировать репозиторий и перейти в него в командной строке.
-- Установите и активируйте виртуальное окружение c учетом версии Python 3.7 (выбираем python не ниже 3.7):
+### Launching a project in dev mode
+- Clone the repository and go to it on the command line.
+- Install and activate the virtual environment taking into account the Python 3.7 version (choose python at least 3.7):
 
 ```bash
 py -3.7 -m venv venv
@@ -37,7 +37,7 @@ py -3.7 -m venv venv
 source venv/Scripts/activate
 ```
 
-- Установите все зависимости из файла **requirements.txt**
+- Install all dependencies from the file **requirements.txt**
 
 ```bash
 python -m pip install --upgrade pip
@@ -47,62 +47,62 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-- Выполните миграции:
+- Perform migrations:
 
 ```bash
 python manage.py migrate --run-syncdb
 ```
 
-Если есть необходимость, заполните базу тестовыми данными командой:
+If necessary, fill in the database with test data with the command:
 
 ```bash
 python manage.py csv_to_db
 ```
 
-Создаем суперпользователя, после меняем в админ панели роль с `user` на `admin`:
+Create a superuser, then change the role in the admin panel from `user` to `admin`:
 
 ```bash
 python manage.py createsuperuser
 ```
 
-Запускаем проект:
+Launching the project:
 
 ```bash
 python manage.py runserver
 ```
 
-### Примеры работы с API для всех пользователей
+### Examples of working with the API for all users
 
-Подробная документация доступна по эндпоинту `/redoc/`
+Detailed documentation is available at the endpoint `/redoc/`
 
-Для неавторизованных пользователей работа с API доступна в режиме чтения, что-либо изменить или создать не получится. 
+For unauthorized users, working with the API is available in read mode, you will not be able to change or create anything.
 
 ```
-Права доступа: Доступно без токена.
-GET /api/v1/categories/ - Получение списка всех категорий
-GET /api/v1/genres/ - Получение списка всех жанров
-GET /api/v1/titles/ - Получение списка всех произведений
-GET /api/v1/titles/{title_id}/reviews/ - Получение списка всех отзывов
-GET /api/v1/titles/{title_id}/reviews/{review_id}/comments/ - Получение списка всех комментариев к отзыву
-Права доступа: Администратор
-GET /api/v1/users/ - Получение списка всех пользователей
+Access rights: Available without a token.
+GET /api/v1/categories/ - Getting a list of all categories
+GET /api/v1/genres/ - Getting a list of all genres
+GET /api/v1/titles/ - Getting a list of all works
+GET /api/v1/titles/{title_id}/reviews/ - Getting a list of all reviews
+GET /api/v1/titles/{title_id}/reviews/{review_id}/comments/ - Getting a list of all comments to the review
+Access rights: Administrator
+GET /api/v1/users/ - Getting a list of all users
 ```
 
-### Пользовательские роли
+### User roles
 
-- **_Аноним_** — может просматривать описания произведений, читать отзывы и комментарии.
-- **_Аутентифицированный пользователь_ (`user`)** — может, как и Аноним, читать всё, дополнительно он может публиковать отзывы и ставить оценку произведениям (фильмам/книгам/песенкам), может комментировать чужие отзывы; может редактировать и удалять свои отзывы и комментарии. Эта роль присваивается по умолчанию каждому новому пользователю.
-- **_Модератор_ (`moderator`)** — те же права, что и у Аутентифицированного пользователя плюс право удалять любые отзывы и комментарии.
-- **_Администратор_ (`admin`)** — полные права на управление всем контентом проекта. Может создавать и удалять произведения, категории и жанры. Может назначать роли пользователям.
-- **_Суперюзер Django_** — обладает правами администратора (admin)
+- **_Anonymous_** — can view descriptions of works, read reviews and comments.
+- **_Authenticated user_ (`user`)** — can, like an Anonymous Person, read everything, additionally he can publish reviews and rate works (films / books / songs), can comment on other people's reviews; can edit and delete his reviews and comments. This role is assigned by default to each new user.
+- **_Moderator_ (`moderator`)** — the same rights as an Authenticated User plus the right to delete any reviews and comments.
+- **_Administrator_ (`admin`)** — full rights to manage all project content. Can create and delete works, categories and genres. Can assign roles to users.
+- **_Django superuser_** — has administrator rights (admin)
 
-### Регистрация нового пользователя
-Получить код подтверждения на переданный `email`.
-Права доступа: Доступно без токена.
-Использовать имя `'me'` в качестве `username` запрещено.
-Поля `email` и `username` должны быть уникальными.
+### Registering a new user
+Get a confirmation code to the transmitted `email`.
+Access rights: Available without a token.
+It is forbidden to use the name `"me"` as a `username`.
+The fields `email` and `username` must be unique.
 
-Регистрация нового пользователя:
+Registering a new user:
 
 ```
 POST /api/v1/auth/signup/
@@ -110,13 +110,12 @@ POST /api/v1/auth/signup/
 
 ```json
 {
-  "email": "string",
-  "username": "string"
+"email": "string",
+"username": "string"
 }
-
 ```
 
-Получение JWT-токена:
+Getting a JWT token:
 
 ```
 POST /api/v1/auth/token/
@@ -124,56 +123,56 @@ POST /api/v1/auth/token/
 
 ```json
 {
-  "username": "string",
-  "confirmation_code": "string"
+"username": "string",
+"confirmation_code": "string"
 }
 ```
 
-### Примеры работы с API для авторизованных пользователей
+### Examples of working with the API for authorized users
 
-Добавление категории:
+Adding a category:
 
 ```
-Права доступа: Администратор.
+Access rights: Administrator.
 POST /api/v1/categories/
 ```
 
 ```json
 {
-  "name": "string",
-  "slug": "string"
+"name": "string",
+"slug": "string"
 }
 ```
 
-Удаление категории:
+Deleting a category:
 
 ```
-Права доступа: Администратор.
+Access rights: Administrator.
 DELETE /api/v1/categories/{slug}/
 ```
 
-Добавление жанра:
+Adding a genre:
 
 ```
-Права доступа: Администратор.
+Access rights: Administrator.
 POST /api/v1/genres/
 ```
 
 ```json
 {
-  "name": "string",
-  "slug": "string"
+"name": "string",
+"slug": "string"
 }
 ```
 
-Удаление жанра:
+Deleting a genre:
 
 ```
-Права доступа: Администратор.
+Access rights: Administrator.
 DELETE /api/v1/genres/{slug}/
 ```
 
-Обновление публикации:
+Updating the publication:
 
 ```
 PUT /api/v1/posts/{id}/
@@ -187,97 +186,97 @@ PUT /api/v1/posts/{id}/
 }
 ```
 
-Добавление произведения:
+Adding a work:
 
 ```
-Права доступа: Администратор. 
-Нельзя добавлять произведения, которые еще не вышли (год выпуска не может быть больше текущего).
+Access rights: Administrator.
+You cannot add works that have not yet been released (the year of release cannot be more than the current one).
 
 POST /api/v1/titles/
 ```
 
 ```json
 {
-  "name": "string",
-  "year": 0,
-  "description": "string",
-  "genre": [
-    "string"
-  ],
-  "category": "string"
+"name": "string",
+"year": 0,
+"description": "string",
+"genre": [
+"string"
+],
+"category": "string"
 }
 ```
 
-Добавление произведения:
+Adding a work:
 
 ```
-Права доступа: Доступно без токена
+Access rights: Available without a token
 GET /api/v1/titles/{titles_id}/
 ```
 
 ```json
 {
-  "id": 0,
-  "name": "string",
-  "year": 0,
-  "rating": 0,
-  "description": "string",
-  "genre": [
-    {
-      "name": "string",
-      "slug": "string"
-    }
-  ],
-  "category": {
-    "name": "string",
-    "slug": "string"
-  }
+"id": 0,
+"name": "string",
+"year": 0,
+"rating": 0,
+"description": "string",
+"genre": [
+{
+"name": "string",
+"slug": "string"
+}
+],
+"category": {
+"name": "string",
+"slug": "string"
+}
 }
 ```
 
-Частичное обновление информации о произведении:
+Partial updating of information about the work:
 
 ```
-Права доступа: Администратор
+Access rights: Administrator
 PATCH /api/v1/titles/{titles_id}/
 ```
 
 ```json
 {
-  "name": "string",
-  "year": 0,
-  "description": "string",
-  "genre": [
-    "string"
-  ],
-  "category": "string"
+"name": "string",
+"year": 0,
+"description": "string",
+"genre": [
+"string"
+],
+"category": "string"
 }
 ```
 
-Частичное обновление информации о произведении:
+Partial updating of information about the work:
 ```
-Права доступа: Администратор
+Access rights: Administrator
 DEL /api/v1/titles/{titles_id}/
 ```
 
-Аналогично по `Titles`, `Reviews` и `Comments`.
+Similarly for `Titles`, `Reviews` and `Comments`.
 
-### Работа с пользователями:
+### Working with users:
 
-Для работы с пользователя есть некоторые ограничения для работы с ними.
-Получение списка всех пользователей.
+There are some restrictions on working with users.
+
+Getting a list of all users:
+```
+Access rights: Administrator
+GET /api/v1/users/ - Getting a list of all users
+```
+
+Adding a user:
 
 ```
-Права доступа: Администратор
-GET /api/v1/users/ - Получение списка всех пользователей
-```
-
-Добавление пользователя:
-
-```
-Права доступа: Администратор
-Поля email и username должны быть уникальными.
-POST /api/v1/users/ - Добавление пользователя
+Access rights: Administrator
+The email and username fields must be unique.
+POST /api/v1/users/ - Adding a user
 ```
 
 ```json
@@ -291,58 +290,58 @@ POST /api/v1/users/ - Добавление пользователя
 }
 ```
 
-Получение пользователя по `username`:
+Getting a user by `username`:
 
 ```
-Права доступа: Администратор
-GET /api/v1/users/{username}/ - Получение пользователя по username
+Access rights: Administrator
+GET /api/v1/users/{username}/ - Getting a user by username
 ```
 
-Изменение данных пользователя по `username`:
+Changing user data by `username`:
 
 ```
-Права доступа: Администратор
-PATCH /api/v1/users/{username}/ - Изменение данных пользователя по username
+Access rights: Administrator
+PATCH /api/v1/users/{username}/ - Changing user data by username
 ```
 
 ```json
 {
-  "username": "string",
-  "email": "user@example.com",
-  "first_name": "string",
-  "last_name": "string",
-  "bio": "string",
-  "role": "user"
+"username": "string",
+"email": "user@example.com",
+"first_name": "string",
+"last_name": "string",
+"bio": "string",
+"role": "user"
 }
 ```
 
-Удаление пользователя по `username`:
+Deleting a user by `username`:
 
 ```
-Права доступа: Администратор
-DELETE /api/v1/users/{username}/ - Удаление пользователя по username
+Access rights: Administrator
+DELETE /api/v1/users/{username}/ - Deleting a user by username
 ```
 
-Получение данных своей учетной записи:
+Getting your account details:
 
 ```
-Права доступа: Любой авторизованный пользователь
-GET /api/v1/users/me/ - Получение данных своей учетной записи
+Access rights: Any authorized user
+GET /api/v1/users/me/ - Getting their account data
 ```
 
-Изменение данных своей учетной записи:
+Changing your account details:
 
-- Права доступа: Любой авторизованный пользователь
 ```
-PATCH /api/v1/users/me/ # Изменение данных своей учетной записи
+Access rights: Any authorized user
+PATCH /api/v1/users/me/ # Changing your account details
 ```
 
-Проект реализован в рамках учебного курса Яндекс.Практикум по специализации Python-разработчик (back-end).
+The project was implemented as part of the Yandex.Practicum course on Python developer specialization (back-end).
 
-### Документация
+### Documentation
 - http://127.0.0.1:8000/redoc/
 
-### Авторы:
-- [Тресков Данил](https://github.com/dnltv)
-- [Чимров Иоанн](https://github.com/ioann7)
-- [Лесничук Кирилл](https://github.com/ButtonSlayer)
+### Authors:
+- [Danil Treskov](https://github.com/dnltv )
+- [Ioann Chimrov](https://github.com/ioann7 )
+- [Kirill Lesnichuk](https://github.com/ButtonSlayer )
