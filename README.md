@@ -5,9 +5,9 @@ The works are divided into categories: "_Books_", "_Films_", "_Music_".
 The list of categories (`Category`) can be expanded (for example, you can add a category "*Fine Arts*" or "*Jewelry*").
 
 Development Team:
-- [Danil Treskov](https://github.com/dnltv )
-- [Ioann Chimrov](https://github.com/ioann7 )
-- [Kirill Lesnichuk](https://github.com/ButtonSlayer )
+- [Danil Treskov](https://github.com/dnltv)
+- [Ioann Chimrov](https://github.com/ioann7)
+- [Kirill Lesnichuk](https://github.com/ButtonSlayer)
 
 The works themselves are not stored in YaMDb, you can't watch a movie or listen to music here.
 
@@ -342,6 +342,6 @@ The project was implemented as part of the Yandex.Practicum course on Python dev
 - http://127.0.0.1:8000/redoc/
 
 ### Authors:
-- [Danil Treskov](https://github.com/dnltv )
-- [Ioann Chimrov](https://github.com/ioann7 )
-- [Kirill Lesnichuk](https://github.com/ButtonSlayer )
+- [Danil Treskov](https://github.com/dnltv)
+- [Ioann Chimrov](https://github.com/ioann7)
+- [Kirill Lesnichuk](https://github.com/ButtonSlayer)
