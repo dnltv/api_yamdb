@@ -29,6 +29,16 @@ Full list in the file **requirements.txt**
 - Clone the repository and go to it on the command line.
 - Install and activate the virtual environment taking into account the Python 3.7 version (choose python at least 3.7):
 
+For Linux / MacOS:
+```bash
+python3.7 -m venv venv
+```
+
+```bash
+. venv/bin/activate
+```
+
+For Windows:
 ```bash
 py -3.7 -m venv venv
 ```
