@@ -28,14 +28,14 @@ class UserViewSet(viewsets.ModelViewSet):
     lookup_field = 'username'
     filter_backends = (filters.SearchFilter,)
     search_fields = ('username',)
-    help_method_names = ['get', 'post', 'delete', 'patch']
+    http_method_names = ['get', 'post', 'delete', 'patch']
 
     @action(
         methods=['get', 'patch'],
-        url_path='me',
         detail=False,
+        url_path='me',
+        permission_classes=[permissions.IsAuthenticated],
         serializer_class=UserEditSerializer,
-        permission_classes=[permissions.IsAuthenticated]
     )
     def users_own_profile(self, request):
         if request.method == 'GET':
@@ -55,7 +55,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 def send_email(data):
     email = EmailMessage(
-        subject=data['email_subject'],
+        subject=data['mail_subject'],
         body=data['email_info'],
         from_email=settings.EMAIL_ADMIN,
         to=[data['to_email']]
@@ -66,7 +66,7 @@ def send_email(data):
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def register(request):
-    serializer = UserRegisterSerializer
+    serializer = UserRegisterSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user, created = User.objects.get_or_create(
         username=serializer.validated_data['username'],
@@ -137,7 +137,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = (AdminModeratorAuthorOrReadOnly,)
 
-    def get_query_set(self):
+    def get_queryset(self):
         title = get_object_or_404(
             Title, id=self.kwargs.get('title_id')
         )

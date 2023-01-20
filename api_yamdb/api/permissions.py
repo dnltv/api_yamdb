@@ -19,7 +19,7 @@ class AdminOrReadOnly(permissions.BasePermission):
     Permission only for admin/superuser or read only.
     """
     def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHOD:
+        if request.method in permissions.SAFE_METHODS:
             return True
         if request.user.is_authenticated:
             return request.user.is_admin

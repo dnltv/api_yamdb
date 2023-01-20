@@ -210,7 +210,7 @@ class Review(models.Model):
     )
     text = models.TextField(verbose_name='Review')
     author = models.ForeignKey(
-        'User',
+        User,
         on_delete=models.CASCADE,
         related_name='reviews',
         verbose_name='Author'
