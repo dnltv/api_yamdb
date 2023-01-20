@@ -11,9 +11,9 @@ Development Team:
 
 The works themselves are not stored in YaMDb, you can't watch a movie or listen to music here.
 
-In each category there are works: books, movies or music. For example, in the category "**_books_**" there may be works "Winnie the Pooh and everything-everything-everything" and "Martian Chronicles", and in the category "**_music_**" — the song "Just Now" by the group "Insects" and the second suite by Bach. A work can be assigned a genre from the preset list (for example, "**_Fairy Tale_**", "**_Rock_**" or "**_Arthouse_**"). Only the administrator can create new genres.
+In each category there are works: books, movies or music. For example, in the category "**_Books_**" there may be works "Winnie the Pooh and everything-everything-everything" and "Martian Chronicles", and in the category "**_Music_**" — the song "Just Now" by the group "Insects" and the second suite by Bach. A work can be assigned a genre from the preset list (for example, "**_Fairy Tale_**", "**_Rock_**" or "**_Arthouse_**"). Only the administrator can create new genres.
 
-Grateful or outraged readers leave text reviews for the works (`Review`) and give the work a **rating** (rating in the range from one to ten). From the set of scores, the average score of the work is automatically calculated.
+Grateful or outraged readers leave text reviews for the works (`Review`) and give the work a **rating** (in the range from one to ten). From the set of scores, the average score of the work is automatically calculated.
 
 The full API documentation is located at the endpoint `/redoc`
 
@@ -23,7 +23,7 @@ The full API documentation is located at the endpoint `/redoc`
 - DRF 3.12.4
 - JWT 5.2.2
 
-Full list in the file requirements.txt
+Full list in the file **requirements.txt**
 
 ### Launching a project in dev mode
 - Clone the repository and go to it on the command line.
