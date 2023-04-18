@@ -6,6 +6,7 @@ Django==3.2
 django-filter==22.1
 djangorestframework==3.12.4
 djangorestframework-simplejwt==5.2.2
+gunicorn==20.0.4
 flake8==5.0.4
 idna==3.4
 importlib-metadata==4.2.0
@@ -14,6 +15,7 @@ isort==5.11.4
 mccabe==0.7.0
 packaging==22.0
 pluggy==0.13.1
+psycopg2-binary==2.8.6
 py==1.11.0
 pycodestyle==2.9.1
 pyflakes==2.5.0
