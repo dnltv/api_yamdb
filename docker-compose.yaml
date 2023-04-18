@@ -13,9 +13,7 @@ services:
     restart: always
     volumes:
       - static_value:/app/static/
-      - media_value:/app/media
-    ports:
-      - "8000:8000"
+      - media_value:/app/media/
     depends_on:
       - db
     env_file:
